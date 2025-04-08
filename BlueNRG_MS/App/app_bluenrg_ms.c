@@ -252,6 +252,7 @@ static void User_Process(void)
 {
   float data_t;
   float data_p;
+  int16_t pDataXYZ[3];
   static uint32_t counter = 0;
 
   if (set_connectable)
@@ -285,13 +286,20 @@ static void User_Process(void)
       // BlueMS_Environmental_Update((int32_t)(data_p *100), (int16_t)(data_t * 10));	// GATT update Press, Temp value (HW)
 
       /* Update emulated Acceleration, Gyroscope and Sensor Fusion data */
-      Set_Random_Motion_Values(counter);		// random x, g, m, q axes
+//      Set_Random_Motion_Values(counter);		// random x, g, m, q axes
+		BSP_ACCELERO_AccGetXYZ(pDataXYZ);
+		x_axes.AXIS_X = pDataXYZ[0];
+		x_axes.AXIS_Y = pDataXYZ[1];
+		x_axes.AXIS_Z = pDataXYZ[2];
 //      x_axes.AXIS_X = 0;
 //      x_axes.AXIS_Y = 1;
 //      x_axes.AXIS_Z = 2;
 //
-      Acc_Update(&x_axes);	// GATT update Acc (HW)
+		Acc_Update(&x_axes);	// GATT update Acc (HW)
       // Quat_Update(&q_axes);
+
+	      PRINTF("DATA: %d, %d, %d \n", x_axes.AXIS_X, x_axes.AXIS_Y, x_axes.AXIS_Z);
+	      PRINTF("DATA: %d, %d, %d \n", pDataXYZ[0], pDataXYZ[1], pDataXYZ[2]);
 
       counter ++;
       if (counter == 40) {

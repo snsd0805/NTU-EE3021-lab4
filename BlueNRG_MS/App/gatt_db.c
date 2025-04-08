@@ -108,19 +108,6 @@ tBleStatus Add_HWServW2ST_Service(void)
   if (ret != BLE_STATUS_SUCCESS)
     return BLE_STATUS_ERROR;
 
-  /* Fill the AccGyroMag BLE Characteristc */
-  COPY_ACC_GYRO_MAG_W2ST_CHAR_UUID(uuid);
-  BLUENRG_memcpy(&char_uuid.Char_UUID_128, uuid, 16);
-  ret =  aci_gatt_add_char(HWServW2STHandle, UUID_TYPE_128, char_uuid.Char_UUID_128,
-                           2+2*3,
-                           CHAR_PROP_NOTIFY,
-                           ATTR_PERMISSION_NONE,
-                           GATT_NOTIFY_READ_REQ_AND_WAIT_FOR_APPL_RESP,
-                           16, 0, &AccGyroMagCharHandle);
-  if (ret != BLE_STATUS_SUCCESS)
-    return BLE_STATUS_ERROR;
-
-
   return BLE_STATUS_SUCCESS;
 }
 

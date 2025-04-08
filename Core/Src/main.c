@@ -102,10 +102,11 @@ int main(void)
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
   MX_DFSDM1_Init();
-  MX_I2C2_Init();
+//  MX_I2C2_Init();
   MX_QUADSPI_Init();
   MX_USART3_UART_Init();
   MX_USB_OTG_FS_PCD_Init();
+  BSP_ACCELERO_Init();
   MX_BlueNRG_MS_Init();
   /* USER CODE BEGIN 2 */
 
