@@ -1,4 +1,5 @@
-# NTU-EE3021-lab3 (BLE Central (GATT client) Programming)
+# NTU-EE3021-lab4 STM32Cubeide BLE programming – Peripheral (GATT server) in STM32 IoT node and Central (GATT client) in Python (RPi)
+
 
 ## Members
 - R12922A01 王廷郡
