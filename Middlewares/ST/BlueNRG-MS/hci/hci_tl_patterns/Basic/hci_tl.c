@@ -316,6 +316,7 @@ void hci_user_evt_proc(void)
 
     list_insert_tail(&hciReadPktPool, (tListNode *)hciReadPacket);
   }
+  osDelay(100);
 }
 
 int32_t hci_notify_asynch_evt(void* pdata)

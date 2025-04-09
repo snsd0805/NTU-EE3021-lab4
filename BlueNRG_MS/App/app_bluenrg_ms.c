@@ -214,19 +214,33 @@ void MX_BlueNRG_MS_Init(void)
 /*
  * BlueNRG-MS background task
  */
-void MX_BlueNRG_MS_Process(void)
+void MX_BlueNRG_MS_Process_BLE(void)
 {
   /* USER CODE BEGIN BlueNRG_MS_Process_PreTreatment */
 
   /* USER CODE END BlueNRG_MS_Process_PreTreatment */
 
-  User_Process();
+//  User_Process();
   hci_user_evt_proc();
 
   /* USER CODE BEGIN BlueNRG_MS_Process_PostTreatment */
 
   /* USER CODE END BlueNRG_MS_Process_PostTreatment */
 }
+void MX_BlueNRG_MS_Process_ACC(void)
+{
+  /* USER CODE BEGIN BlueNRG_MS_Process_PreTreatment */
+
+  /* USER CODE END BlueNRG_MS_Process_PreTreatment */
+
+  User_Process();
+//  hci_user_evt_proc();
+
+  /* USER CODE BEGIN BlueNRG_MS_Process_PostTreatment */
+
+  /* USER CODE END BlueNRG_MS_Process_PostTreatment */
+}
+
 
 /**
  * @brief  Initialize User process.
@@ -308,7 +322,7 @@ static void User_Process(void)
         Reset_Motion_Values();
       }
 #if !USE_BUTTON
-      HAL_Delay(1000); /* wait 1 sec before sending new data */
+      osDelay(100 * freq); /* wait 1 sec before sending new data */
 #endif
     }
 #if USE_BUTTON

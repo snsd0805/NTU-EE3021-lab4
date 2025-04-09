@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "cmsis_os.h"
 #include "app_bluenrg_ms.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -26,6 +27,7 @@
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
+typedef StaticTask_t osStaticThreadDef_t;
 /* USER CODE BEGIN PTD */
 
 /* USER CODE END PTD */
@@ -51,6 +53,30 @@ UART_HandleTypeDef huart3;
 
 PCD_HandleTypeDef hpcd_USB_OTG_FS;
 
+/* Definitions for TASK_BLE */
+osThreadId_t TASK_BLEHandle;
+uint32_t TaskBLEBuffer[ 512 ];
+osStaticThreadDef_t TaskBELControlBlock;
+const osThreadAttr_t TASK_BLE_attributes = {
+  .name = "TASK_BLE",
+  .cb_mem = &TaskBELControlBlock,
+  .cb_size = sizeof(TaskBELControlBlock),
+  .stack_mem = &TaskBLEBuffer[0],
+  .stack_size = sizeof(TaskBLEBuffer),
+  .priority = (osPriority_t) osPriorityNormal,
+};
+/* Definitions for Task_ACC */
+osThreadId_t Task_ACCHandle;
+uint32_t Task_ACCBuffer[ 512 ];
+osStaticThreadDef_t Task_ACCControlBlock;
+const osThreadAttr_t Task_ACC_attributes = {
+  .name = "Task_ACC",
+  .cb_mem = &Task_ACCControlBlock,
+  .cb_size = sizeof(Task_ACCControlBlock),
+  .stack_mem = &Task_ACCBuffer[0],
+  .stack_size = sizeof(Task_ACCBuffer),
+  .priority = (osPriority_t) osPriorityNormal,
+};
 /* USER CODE BEGIN PV */
 
 /* USER CODE END PV */
@@ -63,6 +89,9 @@ static void MX_I2C2_Init(void);
 static void MX_QUADSPI_Init(void);
 static void MX_USART3_UART_Init(void);
 static void MX_USB_OTG_FS_PCD_Init(void);
+void StartTaskBLE(void *argument);
+void StartTaskACC(void *argument);
+
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -112,13 +141,51 @@ int main(void)
 
   /* USER CODE END 2 */
 
+  /* Init scheduler */
+  osKernelInitialize();
+
+  /* USER CODE BEGIN RTOS_MUTEX */
+  /* add mutexes, ... */
+  /* USER CODE END RTOS_MUTEX */
+
+  /* USER CODE BEGIN RTOS_SEMAPHORES */
+  /* add semaphores, ... */
+  /* USER CODE END RTOS_SEMAPHORES */
+
+  /* USER CODE BEGIN RTOS_TIMERS */
+  /* start timers, add new ones, ... */
+  /* USER CODE END RTOS_TIMERS */
+
+  /* USER CODE BEGIN RTOS_QUEUES */
+  /* add queues, ... */
+  /* USER CODE END RTOS_QUEUES */
+
+  /* Create the thread(s) */
+  /* creation of TASK_BLE */
+  TASK_BLEHandle = osThreadNew(StartTaskBLE, NULL, &TASK_BLE_attributes);
+
+  /* creation of Task_ACC */
+  Task_ACCHandle = osThreadNew(StartTaskACC, NULL, &Task_ACC_attributes);
+
+  /* USER CODE BEGIN RTOS_THREADS */
+  /* add threads, ... */
+  /* USER CODE END RTOS_THREADS */
+
+  /* USER CODE BEGIN RTOS_EVENTS */
+  /* add events, ... */
+  /* USER CODE END RTOS_EVENTS */
+
+  /* Start scheduler */
+  osKernelStart();
+
+  /* We should never get here as control is now taken by the scheduler */
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
   {
     /* USER CODE END WHILE */
 
-  MX_BlueNRG_MS_Process();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
@@ -548,10 +615,10 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOB, &GPIO_InitStruct);
 
   /* EXTI interrupt init*/
-  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(EXTI9_5_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(EXTI9_5_IRQn);
 
-  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 0, 0);
+  HAL_NVIC_SetPriority(EXTI15_10_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
 /* USER CODE BEGIN MX_GPIO_Init_2 */
@@ -560,7 +627,26 @@ static void MX_GPIO_Init(void)
 
 /* USER CODE BEGIN 4 */
 
-/* USER CODE END 4 */
+
+void StartTaskBLE(void *argument) {
+    /* USER CODE BEGIN 5 */
+    /* Infinite loop */
+    for (;;) {
+    	MX_BlueNRG_MS_Process_BLE();
+    }
+    /* USER CODE END 5 */
+}
+
+void StartTaskACC(void *argument) {
+    /* USER CODE BEGIN 5 */
+    /* Infinite loop */
+    for (;;) {
+    	MX_BlueNRG_MS_Process_ACC();
+    }
+    /* USER CODE END 5 */
+}
+
+
 
 /**
   * @brief  This function is executed in case of error occurrence.
