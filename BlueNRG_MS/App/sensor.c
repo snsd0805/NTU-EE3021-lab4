@@ -51,6 +51,7 @@ volatile uint8_t request_free_fall_notify = FALSE;
 AxesRaw_t x_axes = {0, 0, 0};
 AxesRaw_t g_axes = {0, 0, 0};
 AxesRaw_t m_axes = {0, 0, 0};
+int16_t freq = 10;
 AxesRaw_t q_axes[SEND_N_QUATERNIONS] = {{0, 0, 0}};
 
 /* Private function prototypes -----------------------------------------------*/
@@ -153,12 +154,17 @@ void user_notify(void * pData)
       evt_blue_aci *blue_evt = (void*)event_pckt->data;
       switch(blue_evt->ecode){
 
-      case EVT_BLUE_GATT_READ_PERMIT_REQ:
-        {
-          evt_gatt_read_permit_req *pr = (void*)blue_evt->data;
-          Read_Request_CB(pr->attr_handle);
-        }
-        break;
+		  case EVT_BLUE_GATT_READ_PERMIT_REQ:
+			{
+			  evt_gatt_read_permit_req *pr = (void*)blue_evt->data;
+			  Read_Request_CB(pr->attr_handle);
+			}
+			break;
+		  case EVT_BLUE_GATT_WRITE_PERMIT_REQ:
+		  {
+			  evt_gatt_write_permit_req *pr = (void*)blue_evt->data;
+			  Write_Request_CB(pr);
+		  }
       }
 
     }

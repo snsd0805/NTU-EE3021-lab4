@@ -54,6 +54,7 @@ extern AxesRaw_t x_axes;
 extern AxesRaw_t g_axes;
 extern AxesRaw_t m_axes;
 extern AxesRaw_t q_axes;
+extern int16_t freq;
 
 extern volatile uint8_t set_connectable;
 extern volatile int     connected;
@@ -297,9 +298,9 @@ static void User_Process(void)
 //
 		Acc_Update(&x_axes);	// GATT update Acc (HW)
       // Quat_Update(&q_axes);
-
-	      PRINTF("DATA: %d, %d, %d \n", x_axes.AXIS_X, x_axes.AXIS_Y, x_axes.AXIS_Z);
-	      PRINTF("DATA: %d, %d, %d \n", pDataXYZ[0], pDataXYZ[1], pDataXYZ[2]);
+//		PRINTF("FREQ=%d \n", freq);
+//	      PRINTF("DATA: %d, %d, %d \n", x_axes.AXIS_X, x_axes.AXIS_Y, x_axes.AXIS_Z);
+//	      PRINTF("DATA: %d, %d, %d \n", pDataXYZ[0], pDataXYZ[1], pDataXYZ[2]);
 
       counter ++;
       if (counter == 40) {
