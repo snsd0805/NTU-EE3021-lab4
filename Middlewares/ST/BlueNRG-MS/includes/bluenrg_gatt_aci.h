@@ -1,26 +1,26 @@
 /**
-  ******************************************************************************
-  * @file    bluenrg_gatt_aci.h
-  * @author  AMS - AAS
-  * @brief   Header file with GATT commands for BlueNRG FW6.3
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2014 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file    bluenrg_gatt_aci.h
+ * @author  AMS - AAS
+ * @brief   Header file with GATT commands for BlueNRG FW6.3
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2014 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
 #ifndef __BLUENRG_GATT_ACI_H__
 #define __BLUENRG_GATT_ACI_H__
 
 #include "bluenrg_gatt_server.h"
 
-/** 
+/**
  * @addtogroup HIGH_LEVEL_INTERFACE HIGH_LEVEL_INTERFACE
  * @{
  */
@@ -30,7 +30,7 @@
  * @brief API for GATT layer.
  * @{
  */
- 
+
 /**
  * @defgroup GATT_Functions GATT functions
  * @brief API for GATT layer.
@@ -38,13 +38,13 @@
  */
 
 /**
-  * @brief  Initialize the GATT layer for server and client roles.
-  * @note   It adds also the GATT service with Service Changed Characteristic.
-  *         Until this command is issued the GATT channel will not process any commands
-  *         even if the connection is opened. This command has to be given
-  *         before using any of the GAP features.
-  * @return Value indicating success or error code.
-  */
+ * @brief  Initialize the GATT layer for server and client roles.
+ * @note   It adds also the GATT service with Service Changed Characteristic.
+ *         Until this command is issued the GATT channel will not process any commands
+ *         even if the connection is opened. This command has to be given
+ *         before using any of the GAP features.
+ * @return Value indicating success or error code.
+ */
 tBleStatus aci_gatt_init(void);
 
 /**
@@ -68,7 +68,7 @@ tBleStatus aci_gatt_init(void);
  * @return Value indicating success or error code.
  */
 tBleStatus aci_gatt_add_serv(uint8_t service_uuid_type,
-			     const uint8_t* service_uuid,
+			     const uint8_t *service_uuid,
 			     uint8_t service_type,
 			     uint8_t max_attr_records,
 			     uint16_t *serviceHandle);
@@ -87,7 +87,7 @@ tBleStatus aci_gatt_add_serv(uint8_t service_uuid_type,
  */
 tBleStatus aci_gatt_include_service(uint16_t service_handle, uint16_t included_start_handle,
 				    uint16_t included_end_handle, uint8_t included_uuid_type,
-				    const uint8_t* included_uuid, uint16_t *included_handle);
+				    const uint8_t *included_uuid, uint16_t *included_handle);
 
 /**
  * @brief Add a characteristic to a service.
@@ -123,14 +123,14 @@ tBleStatus aci_gatt_include_service(uint16_t service_handle, uint16_t included_s
  */
 tBleStatus aci_gatt_add_char(uint16_t serviceHandle,
 			     uint8_t charUuidType,
-			     const uint8_t* charUuid, 
-			     uint8_t charValueLen, 
+			     const uint8_t *charUuid,
+			     uint8_t charValueLen,
 			     uint8_t charProperties,
 			     uint8_t secPermissions,
 			     uint8_t gattEvtMask,
 			     uint8_t encryKeySize,
 			     uint8_t isVariable,
-			     uint16_t* charHandle);
+			     uint16_t *charHandle);
 
 /**
  * Add a characteristic descriptor to a service.
@@ -167,18 +167,18 @@ tBleStatus aci_gatt_add_char(uint16_t serviceHandle,
  * @return Value indicating success or error code.
  */
 tBleStatus aci_gatt_add_char_desc(uint16_t serviceHandle,
-                                  uint16_t charHandle,
-                                  uint8_t descUuidType,
-                                  const uint8_t* uuid, 
-                                  uint8_t descValueMaxLen,
-                                  uint8_t descValueLen,
-                                  const void* descValue, 
-                                  uint8_t secPermissions,
-                                  uint8_t accPermissions,
-                                  uint8_t gattEvtMask,
-                                  uint8_t encryKeySize,
-                                  uint8_t isVariable,
-                                  uint16_t* descHandle);
+				  uint16_t charHandle,
+				  uint8_t descUuidType,
+				  const uint8_t *uuid,
+				  uint8_t descValueMaxLen,
+				  uint8_t descValueLen,
+				  const void *descValue,
+				  uint8_t secPermissions,
+				  uint8_t accPermissions,
+				  uint8_t gattEvtMask,
+				  uint8_t encryKeySize,
+				  uint8_t isVariable,
+				  uint16_t *descHandle);
 
 /**
  * @brief Update a characteristic value in a service.
@@ -233,10 +233,10 @@ tBleStatus aci_gatt_add_char_desc(uint16_t serviceHandle,
  * @param[in] charValue Characteristic value
  * @return Value indicating success or error code.
  */
-tBleStatus aci_gatt_update_char_value(uint16_t servHandle, 
+tBleStatus aci_gatt_update_char_value(uint16_t servHandle,
 				      uint16_t charHandle,
 				      uint8_t charValOffset,
-				      uint8_t charValueLen,   
+				      uint8_t charValueLen,
 				      const void *charValue);
 /**
  * @brief Delete the specified characteristic from the service.
@@ -299,7 +299,7 @@ tBleStatus aci_att_find_information_req(uint16_t conn_handle, uint16_t start_han
  * @return Value indicating success or error code.
  */
 tBleStatus aci_att_find_by_type_value_req(uint16_t conn_handle, uint16_t start_handle, uint16_t end_handle,
-                                          uint8_t* uuid, uint8_t attr_val_len, uint8_t* attr_val);
+					  uint8_t *uuid, uint8_t attr_val_len, uint8_t *attr_val);
 
 /**
  * @brief Send a @a Read @a By @a Type @a Request
@@ -316,7 +316,7 @@ tBleStatus aci_att_find_by_type_value_req(uint16_t conn_handle, uint16_t start_h
  * @return Value indicating success or error code.
  */
 tBleStatus aci_att_read_by_type_req(uint16_t conn_handle, uint16_t start_handle, uint16_t end_handle,
-                                    uint8_t  uuid_type, uint8_t* uuid);
+				    uint8_t uuid_type, uint8_t *uuid);
 
 /**
  * @brief Send a @a Read @a By @a Group @a Type @a Request
@@ -334,7 +334,7 @@ tBleStatus aci_att_read_by_type_req(uint16_t conn_handle, uint16_t start_handle,
  * @return Value indicating success or error code.
  */
 tBleStatus aci_att_read_by_group_type_req(uint16_t conn_handle, uint16_t start_handle, uint16_t end_handle,
-                                    uint8_t  uuid_type, uint8_t* uuid);
+					  uint8_t uuid_type, uint8_t *uuid);
 
 /**
  * @brief Send a @a Prepare @a Write @a Request
@@ -349,7 +349,7 @@ tBleStatus aci_att_read_by_group_type_req(uint16_t conn_handle, uint16_t start_h
  * @return Value indicating success or error code.
  */
 tBleStatus aci_att_prepare_write_req(uint16_t conn_handle, uint16_t attr_handle, uint16_t value_offset,
-                                    uint8_t  attr_val_len, uint8_t* attr_val);
+				     uint8_t attr_val_len, uint8_t *attr_val);
 
 /**
  * @brief Send an @a Execute @a Write @a Request
@@ -383,7 +383,7 @@ tBleStatus aci_gatt_disc_all_prim_services(uint16_t conn_handle);
  * @param uuid 2 or 16 octet UUID
  * @return Value indicating success or error code.
  */
-tBleStatus aci_gatt_disc_prim_service_by_uuid(uint16_t conn_handle, uint8_t uuid_type, uint8_t* uuid);
+tBleStatus aci_gatt_disc_prim_service_by_uuid(uint16_t conn_handle, uint8_t uuid_type, uint8_t *uuid);
 
 /**
  * @brief Start the procedure to find all included services.
@@ -423,7 +423,7 @@ tBleStatus aci_gatt_disc_all_charac_of_serv(uint16_t conn_handle, uint16_t start
  * @return Value indicating success or error code.
  */
 tBleStatus aci_gatt_disc_charac_by_uuid(uint16_t conn_handle, uint16_t start_handle,
-				                     uint16_t end_handle, uint8_t uuid_type, const uint8_t* uuid);
+					uint16_t end_handle, uint8_t uuid_type, const uint8_t *uuid);
 
 /**
  * @brief Start the procedure to discover all characteristic descriptors on the server.
@@ -467,7 +467,7 @@ tBleStatus aci_gatt_read_charac_val(uint16_t conn_handle, uint16_t attr_handle);
  * @return Value indicating success or error code.
  */
 tBleStatus aci_gatt_read_using_charac_uuid(uint16_t conn_handle, uint16_t start_handle, uint16_t end_handle,
-                                    uint8_t  uuid_type, uint8_t* uuid);
+					   uint8_t uuid_type, uint8_t *uuid);
 
 /**
  * @brief Start the procedure to read a long characteristic value.
@@ -499,8 +499,8 @@ tBleStatus aci_gatt_read_long_charac_val(uint16_t conn_handle, uint16_t attr_han
  * @param set_of_handles The handles for which the attribute value has to be read
  * @return Value indicating success or error code.
  */
-tBleStatus aci_gatt_read_multiple_charac_val(uint16_t conn_handle, uint8_t num_handles, 
-                                             uint8_t* set_of_handles);
+tBleStatus aci_gatt_read_multiple_charac_val(uint16_t conn_handle, uint8_t num_handles,
+					     uint8_t *set_of_handles);
 
 /**
  * @brief Start the procedure to write a characteristic value.
@@ -533,7 +533,7 @@ tBleStatus aci_gatt_write_charac_value(uint16_t conn_handle, uint16_t attr_handl
  * @return Value indicating success or error code.
  */
 tBleStatus aci_gatt_write_long_charac_val(uint16_t conn_handle, uint16_t attr_handle,
-                                          uint16_t val_offset, uint8_t val_len, const uint8_t* attr_val);
+					  uint16_t val_offset, uint8_t val_len, const uint8_t *attr_val);
 
 /**
  * @brief Start the procedure to write a characteristic reliably.
@@ -548,7 +548,7 @@ tBleStatus aci_gatt_write_long_charac_val(uint16_t conn_handle, uint16_t attr_ha
  * @return Value indicating success or error code.
  */
 tBleStatus aci_gatt_write_charac_reliable(uint16_t conn_handle, uint16_t attr_handle,
-                                          uint16_t val_offset, uint8_t val_len, uint8_t* attr_val);
+					  uint16_t val_offset, uint8_t val_len, uint8_t *attr_val);
 
 /**
  * @brief Start the procedure to write a long characteristic descriptor.
@@ -563,7 +563,7 @@ tBleStatus aci_gatt_write_charac_reliable(uint16_t conn_handle, uint16_t attr_ha
  * @return Value indicating success or error code.
  */
 tBleStatus aci_gatt_write_long_charac_desc(uint16_t conn_handle, uint16_t attr_handle,
-                                          uint16_t val_offset, uint8_t val_len, uint8_t* attr_val);
+					   uint16_t val_offset, uint8_t val_len, uint8_t *attr_val);
 
 /**
  * @brief Start the procedure to read a long characteristic value.
@@ -576,7 +576,7 @@ tBleStatus aci_gatt_write_long_charac_desc(uint16_t conn_handle, uint16_t attr_h
  * @return Value indicating success or error code.
  */
 tBleStatus aci_gatt_read_long_charac_desc(uint16_t conn_handle, uint16_t attr_handle,
-                                          uint16_t val_offset);
+					  uint16_t val_offset);
 
 /**
  * @brief Start the procedure to write a characteristic descriptor.
@@ -594,7 +594,7 @@ tBleStatus aci_gatt_read_long_charac_desc(uint16_t conn_handle, uint16_t attr_ha
  *		- Already one GATT procedure is started
  */
 tBleStatus aci_gatt_write_charac_descriptor(uint16_t conn_handle, uint16_t attr_handle,
-					   uint8_t value_len, uint8_t *attr_value);
+					    uint8_t value_len, uint8_t *attr_value);
 
 /**
  * @brief Start the procedure to read the descriptor specified.
@@ -622,7 +622,7 @@ tBleStatus aci_gatt_read_charac_desc(uint16_t conn_handle, uint16_t attr_handle)
  *		- Already one GATT procedure is started
  */
 tBleStatus aci_gatt_write_without_response(uint16_t conn_handle, uint16_t attr_handle,
-                                              uint8_t val_len, const uint8_t* attr_val);
+					   uint8_t val_len, const uint8_t *attr_val);
 
 /**
  * @brief Start a signed write without response from the server.
@@ -635,7 +635,7 @@ tBleStatus aci_gatt_write_without_response(uint16_t conn_handle, uint16_t attr_h
  * @return Value indicating success or error code
  */
 tBleStatus aci_gatt_signed_write_without_resp(uint16_t conn_handle, uint16_t attr_handle,
-                                              uint8_t val_len, uint8_t* attr_val);
+					      uint8_t val_len, uint8_t *attr_val);
 
 /**
  * @brief Confirm an indication
@@ -661,11 +661,11 @@ tBleStatus aci_gatt_confirm_indication(uint16_t conn_handle);
  * @return Value indicating success or error code.
  */
 tBleStatus aci_gatt_write_response(uint16_t conn_handle,
-                                   uint16_t attr_handle,
-                                   uint8_t write_status,
-                                   uint8_t err_code,
-                                   uint8_t att_val_len,
-                                   uint8_t *att_val);
+				   uint16_t attr_handle,
+				   uint8_t write_status,
+				   uint8_t err_code,
+				   uint8_t att_val_len,
+				   uint8_t *att_val);
 
 /**
  * @brief Allow the GATT server to send a response to a read request from a client.
@@ -697,7 +697,7 @@ tBleStatus aci_gatt_allow_read(uint16_t conn_handle);
  * @return Value indicating success or error code.
  */
 tBleStatus aci_gatt_set_security_permission(uint16_t service_handle, uint16_t attr_handle,
-                                            uint8_t security_permission);
+					    uint8_t security_permission);
 
 /**
  * @brief This command sets the value of the descriptor specified by charDescHandle.
@@ -762,16 +762,15 @@ tBleStatus aci_gatt_read_handle_value_offset_IDB05A1(uint16_t attr_handle, uint8
  * @return Value indicating success or error code.
  */
 tBleStatus aci_gatt_update_char_value_ext_IDB05A1(uint16_t service_handle, uint16_t char_handle,
-                                                  uint8_t update_type, uint16_t char_length,
-                                                  uint16_t value_offset, uint8_t value_length,
-                                                  const uint8_t* value);
+						  uint8_t update_type, uint16_t char_length,
+						  uint16_t value_offset, uint8_t value_length,
+						  const uint8_t *value);
 
 tBleStatus aci_gatt_set_event_mask(uint32_t event_mask);
 
 /**
  * @}
  */
-
 
 /**
  * @defgroup GATT_Events GATT events
@@ -790,75 +789,75 @@ tBleStatus aci_gatt_set_event_mask(uint32_t event_mask);
  * @li reliable write.
  * See @ref _evt_gatt_attr_modified_IDB04A1 or @ref _evt_gatt_attr_modified__IDB05A1.
  */
-#define EVT_BLUE_GATT_ATTRIBUTE_MODIFIED          (0x0C01)
+#define EVT_BLUE_GATT_ATTRIBUTE_MODIFIED (0x0C01)
 
-typedef __packed struct _evt_gatt_attr_modified_IDB05A1{
-  uint16_t conn_handle; /**< The connection handle which modified the attribute. */
-  uint16_t attr_handle; /**< Handle of the attribute that was modified. */
-  uint8_t  data_length; /**< The length of the data */
-  uint16_t  offset; /**< Offset from which the write has been performed by the peer device */
-  uint8_t  att_data[VARIABLE_SIZE]; /**< The new value (length is data_length) */
+typedef __packed struct _evt_gatt_attr_modified_IDB05A1 {
+    uint16_t conn_handle;	     /**< The connection handle which modified the attribute. */
+    uint16_t attr_handle;	     /**< Handle of the attribute that was modified. */
+    uint8_t data_length;	     /**< The length of the data */
+    uint16_t offset;		     /**< Offset from which the write has been performed by the peer device */
+    uint8_t att_data[VARIABLE_SIZE]; /**< The new value (length is data_length) */
 } PACKED evt_gatt_attr_modified_IDB05A1;
 
-typedef __packed struct _evt_gatt_attr_modified_IDB04A1{
-  uint16_t conn_handle; /**< The connection handle which modified the attribute. */
-  uint16_t attr_handle; /**< Handle of the attribute that was modified. */
-  uint8_t  data_length; /**< The length of the data */
-  uint8_t  att_data[VARIABLE_SIZE]; /**< The new value (length is data_length) */
+typedef __packed struct _evt_gatt_attr_modified_IDB04A1 {
+    uint16_t conn_handle;	     /**< The connection handle which modified the attribute. */
+    uint16_t attr_handle;	     /**< Handle of the attribute that was modified. */
+    uint8_t data_length;	     /**< The length of the data */
+    uint8_t att_data[VARIABLE_SIZE]; /**< The new value (length is data_length) */
 } PACKED evt_gatt_attr_modified_IDB04A1;
 
 /**
  * This event is generated by the client/server to the application on a GATT timeout (30 seconds).
  * See @ref _evt_gatt_procedure_timeout.
  */
-#define EVT_BLUE_GATT_PROCEDURE_TIMEOUT           (0x0C02)
-typedef __packed struct _evt_gatt_procedure_timeout{
-	uint16_t conn_handle; /**< The connection handle on which the GATT procedure has timed out */
+#define EVT_BLUE_GATT_PROCEDURE_TIMEOUT (0x0C02)
+typedef __packed struct _evt_gatt_procedure_timeout {
+    uint16_t conn_handle; /**< The connection handle on which the GATT procedure has timed out */
 } PACKED evt_gatt_procedure_timeout;
 
 /**
  * This event is generated in response to an Exchange MTU request. See aci_gatt_exchange_configuration().
  * See @ref _evt_att_exchange_mtu_resp.
  */
-#define EVT_BLUE_ATT_EXCHANGE_MTU_RESP		  (0x0C03)
-typedef __packed struct _evt_att_exchange_mtu_resp{
-  uint16_t conn_handle; /**< The connection handle related to the response */
-  uint8_t  event_data_length; /**< Length of following data (always 1). */
-  uint16_t server_rx_mtu; /**< Attribute server receive MTU size */
+#define EVT_BLUE_ATT_EXCHANGE_MTU_RESP (0x0C03)
+typedef __packed struct _evt_att_exchange_mtu_resp {
+    uint16_t conn_handle;      /**< The connection handle related to the response */
+    uint8_t event_data_length; /**< Length of following data (always 1). */
+    uint16_t server_rx_mtu;    /**< Attribute server receive MTU size */
 } PACKED evt_att_exchange_mtu_resp;
 
 /**
  * This event is generated in response to a @a Find @a Information @a Request. See aci_att_find_information_req() and
  * Find Information Response in Bluetooth Core v4.0 spec. See @ref _evt_att_find_information_resp.
  */
-#define EVT_BLUE_ATT_FIND_INFORMATION_RESP	  (0x0C04)
-typedef __packed struct _evt_att_find_information_resp{
-  uint16_t conn_handle;			/**< The connection handle related to the response */
-  uint8_t  event_data_length;	/**< Length of following data. */
-  uint8_t  format;				/**< The format of the handle_uuid_pair. @arg 1: 16-bit UUIDs @arg 2: 128-bit UUIDs */
-  /**
-   *  A sequence of handle-uuid pairs.\n
-   *  @li if format=1, each pair is:\n
-   *  [2 octets for handle, 2 octets for UUIDs] \n
-   *  @li if format=2, each pair is:\n
-   *  [2 octets for handle, 16 octets for UUIDs]
-   */
-  uint8_t  handle_uuid_pair[VARIABLE_SIZE];
+#define EVT_BLUE_ATT_FIND_INFORMATION_RESP (0x0C04)
+typedef __packed struct _evt_att_find_information_resp {
+    uint16_t conn_handle;      /**< The connection handle related to the response */
+    uint8_t event_data_length; /**< Length of following data. */
+    uint8_t format;	       /**< The format of the handle_uuid_pair. @arg 1: 16-bit UUIDs @arg 2: 128-bit UUIDs */
+    /**
+     *  A sequence of handle-uuid pairs.\n
+     *  @li if format=1, each pair is:\n
+     *  [2 octets for handle, 2 octets for UUIDs] \n
+     *  @li if format=2, each pair is:\n
+     *  [2 octets for handle, 16 octets for UUIDs]
+     */
+    uint8_t handle_uuid_pair[VARIABLE_SIZE];
 } PACKED evt_att_find_information_resp;
 
 /**
  * This event is generated in response to a @a Find @a By @a Type @a Value @a Request. See
  * Find By Type Value Response in Bluetooth Core v4.0 spec. See @ref _evt_att_find_by_type_val_resp.
  */
-#define EVT_BLUE_ATT_FIND_BY_TYPE_VAL_RESP	  (0x0C05)
-typedef __packed struct _evt_att_find_by_type_val_resp{
-  uint16_t conn_handle;				/**< The connection handle related to the response */
-  uint8_t  event_data_length;		/**< Length of following data. */
-  /**
-   *  Handles Information List as defined in Bluetooth Core v4.0 spec.
-   *  A sequence of handle pairs: [2 octets for Found Attribute Handle, 2 octets for Group End Handle]
-   */
-  uint8_t  handles_info_list[VARIABLE_SIZE];
+#define EVT_BLUE_ATT_FIND_BY_TYPE_VAL_RESP (0x0C05)
+typedef __packed struct _evt_att_find_by_type_val_resp {
+    uint16_t conn_handle;      /**< The connection handle related to the response */
+    uint8_t event_data_length; /**< Length of following data. */
+    /**
+     *  Handles Information List as defined in Bluetooth Core v4.0 spec.
+     *  A sequence of handle pairs: [2 octets for Found Attribute Handle, 2 octets for Group End Handle]
+     */
+    uint8_t handles_info_list[VARIABLE_SIZE];
 } PACKED evt_att_find_by_type_val_resp;
 
 /**
@@ -866,128 +865,128 @@ typedef __packed struct _evt_att_find_by_type_val_resp{
  * aci_gatt_disc_all_charac_of_serv().
  * For more info see Read By Type Response in Bluetooth Core v4.0 spec. See @ref _evt_att_read_by_type_resp.
  */
-#define EVT_BLUE_ATT_READ_BY_TYPE_RESP		  (0x0C06)
-typedef __packed struct _evt_att_read_by_type_resp{
-  uint16_t conn_handle;				/**< The connection handle related to the response */
-  uint8_t  event_data_length;		/**< Length of following data. */
-  uint8_t  handle_value_pair_length; /**< The size of each attribute handle-value pair */
-  /**
-   *  Attribute Data List as defined in Bluetooth Core v4.0 spec.
-   *  A sequence of handle-value pairs: [2 octets for Attribute Handle, (handle_value_pair_length - 2 octets) for Attribute Value]
-   */
-  uint8_t  handle_value_pair[VARIABLE_SIZE];
+#define EVT_BLUE_ATT_READ_BY_TYPE_RESP (0x0C06)
+typedef __packed struct _evt_att_read_by_type_resp {
+    uint16_t conn_handle;	      /**< The connection handle related to the response */
+    uint8_t event_data_length;	      /**< Length of following data. */
+    uint8_t handle_value_pair_length; /**< The size of each attribute handle-value pair */
+    /**
+     *  Attribute Data List as defined in Bluetooth Core v4.0 spec.
+     *  A sequence of handle-value pairs: [2 octets for Attribute Handle, (handle_value_pair_length - 2 octets) for Attribute Value]
+     */
+    uint8_t handle_value_pair[VARIABLE_SIZE];
 } PACKED evt_att_read_by_type_resp;
 
 /**
  * This event is generated in response to a @a Read @a Request. See aci_gatt_read_charac_val().
  * For more info see Read Response in Bluetooth Core v4.0 spec. See @ref _evt_att_read_resp.
  */
-#define EVT_BLUE_ATT_READ_RESP			  (0x0C07)
-typedef __packed struct _evt_att_read_resp{
-  uint16_t conn_handle;				/**< The connection handle related to the response. */
-  uint8_t  event_data_length;		/**< Length of following data. */
-  uint8_t  attribute_value[VARIABLE_SIZE]; /**< The value of the attribute. */
+#define EVT_BLUE_ATT_READ_RESP (0x0C07)
+typedef __packed struct _evt_att_read_resp {
+    uint16_t conn_handle;		    /**< The connection handle related to the response. */
+    uint8_t event_data_length;		    /**< Length of following data. */
+    uint8_t attribute_value[VARIABLE_SIZE]; /**< The value of the attribute. */
 } PACKED evt_att_read_resp;
 
 /**
  * This event is generated in response to a @a Read @a Blob @a Request. See aci_gatt_read_long_charac_val().
  * For more info see Read Blob Response in Bluetooth Core v4.0 spec. See @ref _evt_att_read_blob_resp.
  */
-#define EVT_BLUE_ATT_READ_BLOB_RESP		  (0x0C08)
-typedef __packed struct _evt_att_read_blob_resp{
-  uint16_t conn_handle;				/**< The connection handle related to the response. */
-  uint8_t  event_data_length;		/**< Length of following data. */
-  uint8_t  part_attribute_value[VARIABLE_SIZE]; /**< Part of the attribute value. */
+#define EVT_BLUE_ATT_READ_BLOB_RESP (0x0C08)
+typedef __packed struct _evt_att_read_blob_resp {
+    uint16_t conn_handle;			 /**< The connection handle related to the response. */
+    uint8_t event_data_length;			 /**< Length of following data. */
+    uint8_t part_attribute_value[VARIABLE_SIZE]; /**< Part of the attribute value. */
 } PACKED evt_att_read_blob_resp;
 
 /**
  * This event is generated in response to a @a Read @a Multiple @a Request.
  * For more info see Read Multiple Response in Bluetooth Core v4.0 spec. See @ref _evt_att_read_mult_resp.
  */
-#define EVT_BLUE_ATT_READ_MULTIPLE_RESP		  (0x0C09)
-typedef __packed struct _evt_att_read_mult_resp{
-  uint16_t conn_handle;				/**< The connection handle related to the response. */
-  uint8_t  event_data_length;		/**< Length of following data. */
-  uint8_t  set_of_values[VARIABLE_SIZE]; /**< A set of two or more values.*/
+#define EVT_BLUE_ATT_READ_MULTIPLE_RESP (0x0C09)
+typedef __packed struct _evt_att_read_mult_resp {
+    uint16_t conn_handle;		  /**< The connection handle related to the response. */
+    uint8_t event_data_length;		  /**< Length of following data. */
+    uint8_t set_of_values[VARIABLE_SIZE]; /**< A set of two or more values.*/
 } PACKED evt_att_read_mult_resp;
 
 /**
  * This event is generated in response to a @a Read @a By @a Group @a Type @a Request. See aci_gatt_disc_all_prim_services().
  * For more info see Read By Group type Response in Bluetooth Core v4.0 spec. See @ref _evt_att_read_by_group_resp.
  */
-#define EVT_BLUE_ATT_READ_BY_GROUP_TYPE_RESP           (0x0C0A)
-typedef __packed struct _evt_att_read_by_group_resp{
-  uint16_t conn_handle;				/**< The connection handle related to the response. */
-  uint8_t  event_data_length;		/**< Length of following data. */
-  uint8_t  attribute_data_length;   /**< The size of each Attribute Data. */
-  /**
-   *  A list of Attribute Data where the attribute data is composed by:
-   *  @li 2 octets for Attribute Handle
-   *  @li 2 octets for End Group Handle
-   *  @li (attribute_data_length - 4) octets for Attribute Value
-   */
-  uint8_t  attribute_data_list[VARIABLE_SIZE];
+#define EVT_BLUE_ATT_READ_BY_GROUP_TYPE_RESP (0x0C0A)
+typedef __packed struct _evt_att_read_by_group_resp {
+    uint16_t conn_handle;	   /**< The connection handle related to the response. */
+    uint8_t event_data_length;	   /**< Length of following data. */
+    uint8_t attribute_data_length; /**< The size of each Attribute Data. */
+    /**
+     *  A list of Attribute Data where the attribute data is composed by:
+     *  @li 2 octets for Attribute Handle
+     *  @li 2 octets for End Group Handle
+     *  @li (attribute_data_length - 4) octets for Attribute Value
+     */
+    uint8_t attribute_data_list[VARIABLE_SIZE];
 } PACKED evt_att_read_by_group_resp;
 
 /**
  * This event is generated in response to a @a Prepare @a Write @a Request.
  * For more info see Prepare Write Response in Bluetooth Core v4.0 spec. See @ref _evt_att_prepare_write_resp.
  */
-#define EVT_BLUE_ATT_PREPARE_WRITE_RESP		  (0x0C0C)
-typedef __packed struct _evt_att_prepare_write_resp{
-  uint16_t conn_handle;				/**< The connection handle related to the response. */
-  uint8_t  event_data_length;		/**< Length of following data. */
-  uint16_t  attribute_handle;		/**< The handle of the attribute to be written. */
-  uint16_t  offset;					/**< The offset of the first octet to be written. */
-  uint8_t  part_attr_value[VARIABLE_SIZE]; /**< The value of the attribute to be written. */
+#define EVT_BLUE_ATT_PREPARE_WRITE_RESP (0x0C0C)
+typedef __packed struct _evt_att_prepare_write_resp {
+    uint16_t conn_handle;		    /**< The connection handle related to the response. */
+    uint8_t event_data_length;		    /**< Length of following data. */
+    uint16_t attribute_handle;		    /**< The handle of the attribute to be written. */
+    uint16_t offset;			    /**< The offset of the first octet to be written. */
+    uint8_t part_attr_value[VARIABLE_SIZE]; /**< The value of the attribute to be written. */
 } PACKED evt_att_prepare_write_resp;
 
 /**
  * This event is generated in response to an @a Execute @a Write @a Request.
  * For more info see Execute Write Response in Bluetooth Core v4.0 spec. See @ref _evt_att_exec_write_resp.
  */
-#define EVT_BLUE_ATT_EXEC_WRITE_RESP		  (0x0C0D)
-typedef __packed struct _evt_att_exec_write_resp{
-  uint16_t conn_handle;			/**< The connection handle related to the response. */
-  uint8_t  event_data_length; 	/**< Always 0. */
+#define EVT_BLUE_ATT_EXEC_WRITE_RESP (0x0C0D)
+typedef __packed struct _evt_att_exec_write_resp {
+    uint16_t conn_handle;      /**< The connection handle related to the response. */
+    uint8_t event_data_length; /**< Always 0. */
 } PACKED evt_att_exec_write_resp;
 
 /**
  * This event is generated when an indication is received from the server.
  * For more info see Handle Value Indication in Bluetooth Core v4.0 spec. See @ref _evt_gatt_indication.
  */
-#define EVT_BLUE_GATT_INDICATION		  (0x0C0E)
-typedef __packed struct _evt_gatt_indication{
-  uint16_t conn_handle;		  			/**< The connection handle related to the event. */
-  uint8_t  event_data_length; 			/**< Length of following data. */
-  uint16_t attr_handle;					/**< The handle of the attribute. */
-  uint8_t  attr_value[VARIABLE_SIZE]; 	/**< The current value of the attribute. */
+#define EVT_BLUE_GATT_INDICATION (0x0C0E)
+typedef __packed struct _evt_gatt_indication {
+    uint16_t conn_handle;	       /**< The connection handle related to the event. */
+    uint8_t event_data_length;	       /**< Length of following data. */
+    uint16_t attr_handle;	       /**< The handle of the attribute. */
+    uint8_t attr_value[VARIABLE_SIZE]; /**< The current value of the attribute. */
 } PACKED evt_gatt_indication;
 
 /**
  * This event is generated when a notification is received from the server.
  * For more info see Handle Value Notification in Bluetooth Core v4.0 spec. See @ref _evt_gatt_notification.
  */
-#define EVT_BLUE_GATT_NOTIFICATION		  (0x0C0F)
-typedef __packed struct _evt_gatt_notification{
-  uint16_t conn_handle;					/**< The connection handle related to the event. */
-  uint8_t  event_data_length; 			/**< Length of following data. */
-  uint16_t attr_handle;					/**< The handle of the attribute. */
-  uint8_t  attr_value[VARIABLE_SIZE]; 	/**< The current value of the attribute. */
+#define EVT_BLUE_GATT_NOTIFICATION (0x0C0F)
+typedef __packed struct _evt_gatt_notification {
+    uint16_t conn_handle;	       /**< The connection handle related to the event. */
+    uint8_t event_data_length;	       /**< Length of following data. */
+    uint16_t attr_handle;	       /**< The handle of the attribute. */
+    uint8_t attr_value[VARIABLE_SIZE]; /**< The current value of the attribute. */
 } PACKED evt_gatt_attr_notification;
 
 /**
  * This event is generated when a GATT client procedure completes either with error or successfully.
  * See @ref _evt_gatt_procedure_complete.
  */
-#define EVT_BLUE_GATT_PROCEDURE_COMPLETE          (0x0C10)
-typedef __packed struct _evt_gatt_procedure_complete{
-  uint16_t conn_handle; /**< The connection handle on which the GATT procedure has completed */
-  uint8_t  data_length; /**< Length of error_code field (always 1). */
-  /**
-   * Indicates whether the procedure completed with error (BLE_STATUS_FAILED) or was successful (BLE_STATUS_SUCCESS).
-   */
-  uint8_t  error_code;
+#define EVT_BLUE_GATT_PROCEDURE_COMPLETE (0x0C10)
+typedef __packed struct _evt_gatt_procedure_complete {
+    uint16_t conn_handle; /**< The connection handle on which the GATT procedure has completed */
+    uint8_t data_length;  /**< Length of error_code field (always 1). */
+    /**
+     * Indicates whether the procedure completed with error (BLE_STATUS_FAILED) or was successful (BLE_STATUS_SUCCESS).
+     */
+    uint8_t error_code;
 } PACKED evt_gatt_procedure_complete;
 
 /**
@@ -995,13 +994,13 @@ typedef __packed struct _evt_gatt_procedure_complete{
  * by the server at the end of one of the GATT discovery procedures. This does not mean that the procedure ended
  * with an error, but this error event is part of the procedure itself. See @ref _evt_gatt_error_resp.
  */
-#define EVT_BLUE_GATT_ERROR_RESP                  (0x0C11)
-typedef __packed struct _evt_gatt_error_resp{
-  uint16_t conn_handle;			/**< The connection handle related to the event. */
-  uint8_t  event_data_length;	/**< Length of following data. */
-  uint8_t  req_opcode;			/**< The request that generated this error response. */
-  uint16_t attr_handle;			/**< The attribute handle that generated this error response. */
-  uint8_t  error_code;			/**< The reason why the request has generated an error response. See Error Response in Bluetooth Core v4.0 spec.  */
+#define EVT_BLUE_GATT_ERROR_RESP (0x0C11)
+typedef __packed struct _evt_gatt_error_resp {
+    uint16_t conn_handle;      /**< The connection handle related to the event. */
+    uint8_t event_data_length; /**< Length of following data. */
+    uint8_t req_opcode;	       /**< The request that generated this error response. */
+    uint16_t attr_handle;      /**< The attribute handle that generated this error response. */
+    uint8_t error_code;	       /**< The reason why the request has generated an error response. See Error Response in Bluetooth Core v4.0 spec.  */
 } PACKED evt_gatt_error_resp;
 
 /**
@@ -1012,16 +1011,16 @@ typedef __packed struct _evt_gatt_error_resp{
  * "Read using Characteristic UUID" has been performed. See @ref _evt_gatt_disc_read_char_by_uuid_resp.
  */
 #define EVT_BLUE_GATT_DISC_READ_CHAR_BY_UUID_RESP (0x0C12)
-typedef __packed struct _evt_gatt_disc_read_char_by_uuid_resp{
-  uint16_t conn_handle;						/**< The connection handle related to the event. */
-  uint8_t  event_data_length;				/**< Length of following data. */
-  uint16_t attr_handle;						/**< The handle of the attribute. */
-  /**
-   * The attribute value will be a service declaration as defined in Bluetooth Core v4.0 spec (vol.3, Part G, ch. 3.3.1),
-   * when a "Discover Characteristics By UUID" has been started. It will be the value of the Characteristic if a
-   * "Read using Characteristic UUID" has been performed.
-   */
-  uint8_t  attr_value[VARIABLE_SIZE];
+typedef __packed struct _evt_gatt_disc_read_char_by_uuid_resp {
+    uint16_t conn_handle;      /**< The connection handle related to the event. */
+    uint8_t event_data_length; /**< Length of following data. */
+    uint16_t attr_handle;      /**< The handle of the attribute. */
+    /**
+     * The attribute value will be a service declaration as defined in Bluetooth Core v4.0 spec (vol.3, Part G, ch. 3.3.1),
+     * when a "Discover Characteristics By UUID" has been started. It will be the value of the Characteristic if a
+     * "Read using Characteristic UUID" has been performed.
+     */
+    uint8_t attr_value[VARIABLE_SIZE];
 } PACKED evt_gatt_disc_read_char_by_uuid_resp;
 
 /**
@@ -1035,12 +1034,12 @@ typedef __packed struct _evt_gatt_disc_read_char_by_uuid_resp{
  * In case of write/signed write commands, no response is sent to the client but the attribute is not modified.
  * See @ref evt_gatt_write_permit_req.
  */
-#define EVT_BLUE_GATT_WRITE_PERMIT_REQ            (0x0C13)
-typedef __packed struct _evt_gatt_write_permit_req{
-  uint16_t conn_handle; /**< Handle of the connection on which there was the request to write the attribute. */
-  uint16_t attr_handle; /**< The handle of the attribute for which the write request has been made by the client */
-  uint8_t  data_length; /**< Length of data field. */
-  uint8_t  data[VARIABLE_SIZE]; /**< The data that the client has requested to write */
+#define EVT_BLUE_GATT_WRITE_PERMIT_REQ (0x0C13)
+typedef __packed struct _evt_gatt_write_permit_req {
+    uint16_t conn_handle;	 /**< Handle of the connection on which there was the request to write the attribute. */
+    uint16_t attr_handle;	 /**< The handle of the attribute for which the write request has been made by the client */
+    uint8_t data_length;	 /**< Length of data field. */
+    uint8_t data[VARIABLE_SIZE]; /**< The data that the client has requested to write */
 } PACKED evt_gatt_write_permit_req;
 
 /**
@@ -1052,12 +1051,12 @@ typedef __packed struct _evt_gatt_write_permit_req{
  * See @ref evt_gatt_read_permit_req.
  *
  */
-#define EVT_BLUE_GATT_READ_PERMIT_REQ             (0x0C14)
-typedef __packed struct _evt_gatt_read_permit_req{
-  uint16_t conn_handle; /**< Handle of the connection on which there was the request to read the attribute. */
-  uint16_t attr_handle; /**< The handle of the attribute for which the read request has been made by the client */
-  uint8_t  data_length; /**< Length of offset field. */
-  uint16_t offset;      /**< Contains the offset from which the read has been requested */
+#define EVT_BLUE_GATT_READ_PERMIT_REQ (0x0C14)
+typedef __packed struct _evt_gatt_read_permit_req {
+    uint16_t conn_handle; /**< Handle of the connection on which there was the request to read the attribute. */
+    uint16_t attr_handle; /**< The handle of the attribute for which the read request has been made by the client */
+    uint8_t data_length;  /**< Length of offset field. */
+    uint16_t offset;	  /**< Contains the offset from which the read has been requested */
 } PACKED evt_gatt_read_permit_req;
 
 /**
@@ -1069,11 +1068,11 @@ typedef __packed struct _evt_gatt_read_permit_req{
  * See @ref evt_gatt_read_multi_permit_req.
  *
  */
-#define EVT_BLUE_GATT_READ_MULTI_PERMIT_REQ       (0x0C15)
-typedef __packed struct _evt_gatt_read_multi_permit_req{
-  uint16_t conn_handle; /**< Handle of the connection on which there was the request to read the attribute. */
-  uint8_t  data_length; /**< Length of data field. */
-  uint8_t  data[VARIABLE_SIZE]; /**< The handles of the attributes that have been requested by the client for a read. */
+#define EVT_BLUE_GATT_READ_MULTI_PERMIT_REQ (0x0C15)
+typedef __packed struct _evt_gatt_read_multi_permit_req {
+    uint16_t conn_handle;	 /**< Handle of the connection on which there was the request to read the attribute. */
+    uint8_t data_length;	 /**< Length of data field. */
+    uint8_t data[VARIABLE_SIZE]; /**< The handles of the attributes that have been requested by the client for a read. */
 } PACKED evt_gatt_read_multi_permit_req;
 
 /**
@@ -1083,20 +1082,19 @@ typedef __packed struct _evt_gatt_read_multi_permit_req{
  * See @ref evt_gatt_tx_pool_vailable.
  *
  */
-#define EVT_BLUE_GATT_TX_POOL_AVAILABLE           (0x0C16)
-typedef __packed struct _evt_gatt_tx_pool_available{
-  uint16_t conn_handle; /**< Handle of the connection on which there was the request to read the attribute. */
-  uint16_t available_buffers; /**< Length of data field. */
+#define EVT_BLUE_GATT_TX_POOL_AVAILABLE (0x0C16)
+typedef __packed struct _evt_gatt_tx_pool_available {
+    uint16_t conn_handle;	/**< Handle of the connection on which there was the request to read the attribute. */
+    uint16_t available_buffers; /**< Length of data field. */
 } PACKED evt_gatt_tx_pool_available;
 
 /**
  * This event is raised on the server when the client confirms the reception of an indication.
  */
-#define EVT_BLUE_GATT_SERVER_CONFIRMATION_EVENT    (0x0C17)
-typedef __packed struct _evt_gatt_server_confirmation{
-  uint16_t conn_handle; /**< Handle of the connection on which there was the request to read the attribute. */
+#define EVT_BLUE_GATT_SERVER_CONFIRMATION_EVENT (0x0C17)
+typedef __packed struct _evt_gatt_server_confirmation {
+    uint16_t conn_handle; /**< Handle of the connection on which there was the request to read the attribute. */
 } PACKED evt_gatt_server_confirmation;
-
 
 /**
  * This event is given to the application when a prepare write request
@@ -1109,13 +1107,13 @@ typedef __packed struct _evt_gatt_server_confirmation{
  * and an error response will be sent to the client, with the error code as specified by the application.
  * See @ref evt_gatt_write_permit_req.
  */
-#define EVT_BLUE_GATT_PREPARE_WRITE_PERMIT_REQ            (0x0C18)
-typedef __packed struct _evt_gatt_prepare_write_permit_req{
-  uint16_t conn_handle; /**< Handle of the connection on which there was the request to write the attribute. */
-  uint16_t attr_handle; /**< The handle of the attribute for which the write request has been made by the client */
-  uint16_t offset; /**< The offset from which the prepare write has been requested */
-  uint8_t  data_length; /**< Length of data field. */
-  uint8_t  data[VARIABLE_SIZE]; /**< The data that the client has requested to write */
+#define EVT_BLUE_GATT_PREPARE_WRITE_PERMIT_REQ (0x0C18)
+typedef __packed struct _evt_gatt_prepare_write_permit_req {
+    uint16_t conn_handle;	 /**< Handle of the connection on which there was the request to write the attribute. */
+    uint16_t attr_handle;	 /**< The handle of the attribute for which the write request has been made by the client */
+    uint16_t offset;		 /**< The offset from which the prepare write has been requested */
+    uint8_t data_length;	 /**< Length of data field. */
+    uint8_t data[VARIABLE_SIZE]; /**< The data that the client has requested to write */
 } PACKED evt_gatt_prepare_write_permit_req;
 
 /**
