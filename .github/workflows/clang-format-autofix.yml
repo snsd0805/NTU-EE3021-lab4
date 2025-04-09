@@ -3,10 +3,10 @@ name: Clang Format Auto Fix
 on:
   push:
     branches:
-      - master
+      - main
   pull_request:
     branches:
-      - master
+      - main
 
 jobs:
   clang-format:
